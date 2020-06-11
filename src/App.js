@@ -5,6 +5,8 @@ import useInterval from "./useInterval";
 import { css } from "emotion";
 import moment from "moment/min/moment-with-locales";
 
+import { useWindowWidth } from "@react-hook/window-size";
+
 import {
   Flex,
   Button,
@@ -33,6 +35,7 @@ const App = () => {
   let currDowJa;
   let currDowOrdinalNum;
 
+  const screenWidth = useWindowWidth();
   // States
   // ------------------------------
   const [state, setState] = useState({
@@ -106,6 +109,11 @@ const App = () => {
     </div>
   );
 
+  let sizeDenominator = 1;
+  if (screenWidth > 600) {
+    sizeDenominator = 1.8;
+  }
+
   const Detail = () => (
     <div
       style={{
@@ -117,7 +125,7 @@ const App = () => {
       <div
         style={{
           display: "inline",
-          fontSize: "4vw",
+          fontSize: String(4 / sizeDenominator) + "vw",
           fontWeight: "bold",
           margin: "0% 5%",
           verticalAlign: "text-bottom"
@@ -126,12 +134,33 @@ const App = () => {
         {/* fixmeなぜか左に寄ってないのでヒューリスティックに対応 */}第
         {state.dowOrdinalNum}週目
       </div>
-      <div style={{ fontSize: "10vw", fontWeight: "bold", margin: "0% 5%" }}>
+      <div
+        id="dowJa"
+        style={{
+          fontSize: String(10 / sizeDenominator) + "vw",
+          fontWeight: "bold",
+          margin: "0% 5%"
+        }}
+      >
         {/* fixmeなぜか左に寄ってないのでヒューリスティックに対応 */}
         {state.dowJa}
       </div>
-      <div style={{ fontSize: "6vw", margin: "0% 5%" }}>{state.dowEn}</div>
-      <div style={{ fontSize: "10vw", margin: "0% 5%" }}>{state.time}</div>
+      <div
+        style={{
+          fontSize: String(6 / sizeDenominator) + "vw",
+          margin: "0% 5%"
+        }}
+      >
+        {state.dowEn}
+      </div>
+      <div
+        style={{
+          fontSize: String(10 / sizeDenominator) + "vw",
+          margin: "0% 5%"
+        }}
+      >
+        {state.time}
+      </div>
     </div>
   );
 
@@ -160,7 +189,7 @@ const App = () => {
       style={{
         display: "flex",
         width: "100vw",
-        height: "90vh", //[fixme]なぜか上側に少し寄ってるのでヒューリスティックに対応
+        height: "100vh", //[fixme]なぜか上側に少し寄ってるのでヒューリスティックに対応
         justifyContent: "center",
         alignItems: "center"
       }}
