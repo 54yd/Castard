@@ -29,7 +29,9 @@ const App = () => {
   let currTime;
   let currDay;
   let currMonth;
-  let currDow;
+  let currDowEn;
+  let currDowJa;
+  let currDowOrdinalNum;
 
   // States
   // ------------------------------
