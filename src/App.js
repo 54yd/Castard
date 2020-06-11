@@ -110,8 +110,10 @@ const App = () => {
   );
 
   let sizeDenominator = 1;
-  if (screenWidth > 600) {
+  if (screenWidth < 900 && screenWidth > 600) {
     sizeDenominator = 1.8;
+  } else if (screenWidth >= 900) {
+    sizeDenominator = 5.5;
   }
 
   const Detail = () => (
